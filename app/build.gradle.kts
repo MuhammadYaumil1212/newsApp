@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
+    kotlin("kapt")
 }
 
 android {
@@ -75,10 +77,16 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
     //Dagger Hilt
-    implementation( "com.google.dagger:hilt-android:2.45")
-    ksp( "com.google.dagger:hilt-compiler:2.45")
-    implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
+    var daggerVersion = "2.48"
+    var hiltVersion = "1.1.0"
+    implementation( "com.google.dagger:hilt-android:${daggerVersion}")
+    kapt("com.google.dagger:hilt-android-compiler:${daggerVersion}")
+    kapt("androidx.hilt:hilt-compiler:${hiltVersion}")
+    implementation ("androidx.hilt:hilt-navigation-compose:${hiltVersion}")
 
+    //kotlinx serialization
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+    implementation ("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
 
     //Retrofit
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
@@ -108,4 +116,10 @@ dependencies {
     ksp("androidx.room:room-compiler:$room_version")
 
 
+}
+
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
 }
