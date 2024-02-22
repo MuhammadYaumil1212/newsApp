@@ -1,7 +1,10 @@
 package yr.yaumilramadhani.newsapp.presentations.navgraph
 
+import androidx.navigation.NamedNavArgument
+
 sealed class Routes(
-    val route:String
+    val route:String,
+    val arguments: List<NamedNavArgument> = emptyList()
 ){
     object OnBoardingScreen:Routes(route = "onBoardingScreen")
     object HomeScreen:Routes(route="homeScreen")
