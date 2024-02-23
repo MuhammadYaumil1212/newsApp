@@ -1,4 +1,4 @@
-package yr.yaumilramadhani.newsapp.domain.usecases
+package yr.yaumilramadhani.newsapp.domain.usecases.appEntry
 
 import kotlinx.coroutines.flow.Flow
 import yr.yaumilramadhani.newsapp.domain.manager.LocalUserManager
