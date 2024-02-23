@@ -1,6 +1,8 @@
 package yr.yaumilramadhani.newsapp.presentations.common
 
 import android.content.res.Configuration
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -35,15 +37,24 @@ import yr.yaumilramadhani.newsapp.domain.entity.Article
 import yr.yaumilramadhani.newsapp.domain.entity.Source
 import yr.yaumilramadhani.newsapp.presentations.onboarding.Dimens
 import yr.yaumilramadhani.newsapp.ui.theme.NewsAppTheme
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ArticleCard(
     modifier: Modifier = Modifier,
     article: Article,
     onClick:()->Unit
 ) {
+    val dateSt = article.publishedAt
+    val dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
+    val formattedDate = LocalDateTime.parse(dateSt, dateFormatter)
+    val resultPublished = DateTimeFormatter.ofPattern("MMMM dd, yyyy | hh:mm").format(formattedDate)
     Row(
-        modifier=modifier.clickable { onClick() },
+        modifier=modifier
+            .padding(start = 20.dp, end = 20.dp)
+            .clickable { onClick() },
     ) {
         AsyncImage(
             modifier= Modifier
@@ -56,7 +67,7 @@ fun ArticleCard(
         Column(
             verticalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
-                .padding(horizontal = Dimens.ExtraSmallPadding)
+                .padding(horizontal = Dimens.smallPadding)
                 .height(Dimens.articleCardSize)
         ) {
             Text(
@@ -81,7 +92,7 @@ fun ArticleCard(
                 )
                 Spacer(modifier = Modifier.width(Dimens.ExtraSmallPadding2))
                 Text(
-                    text = article.publishedAt ?: "",
+                    text = resultPublished,
                     style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
                     color = colorResource(id = R.color.body),
                 )

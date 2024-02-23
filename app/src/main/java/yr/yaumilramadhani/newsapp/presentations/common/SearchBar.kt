@@ -3,11 +3,13 @@ package yr.yaumilramadhani.newsapp.presentations.common
 import android.content.res.Configuration
 import androidx.annotation.ColorRes
 import androidx.compose.foundation.border
+import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardActions
@@ -18,6 +20,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material3.TextFieldDefaults.indicatorLine
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -52,10 +55,15 @@ fun SearchBar(
         }
     }
 
-    Box(modifier = modifier){
+    Box(modifier = modifier.padding(start = 20.dp, end = 20.dp)){
         val containerColor = colorResource(id = R.color.input_background)
+        val colors = TextFieldDefaults.textFieldColors(
+            focusedIndicatorColor = Color.Gray
+        )
         TextField(
-            modifier=Modifier.fillMaxWidth(),
+            modifier=Modifier
+                .fillMaxWidth()
+                .searchBarBorder(),
             value = text,
             onValueChange = onValueChange,
             readOnly=readOnly,
@@ -76,6 +84,8 @@ fun SearchBar(
             colors = TextFieldDefaults.colors(
                 focusedTextColor = if(isSystemInDarkTheme())Color.White else Color.Black,
                 focusedContainerColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
                 unfocusedContainerColor = Color.Transparent,
                 disabledContainerColor = Color.Transparent,
                 cursorColor = if(isSystemInDarkTheme())Color.White else Color.Black,
@@ -97,7 +107,7 @@ fun Modifier.searchBarBorder() = composed {
         border(
             width = 1.dp,
             color = Color.Black,
-            shape = MaterialTheme.shapes.medium
+            shape = MaterialTheme.shapes.medium,
         )
     }else{
         this
