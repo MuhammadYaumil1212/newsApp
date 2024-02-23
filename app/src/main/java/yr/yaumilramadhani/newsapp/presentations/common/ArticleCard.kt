@@ -53,7 +53,6 @@ fun ArticleCard(
     val resultPublished = DateTimeFormatter.ofPattern("MMMM dd, yyyy | hh:mm").format(formattedDate)
     Row(
         modifier=modifier
-            .padding(start = 20.dp, end = 20.dp)
             .clickable { onClick() },
     ) {
         AsyncImage(
@@ -101,6 +100,7 @@ fun ArticleCard(
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable

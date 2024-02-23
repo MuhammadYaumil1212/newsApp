@@ -17,6 +17,8 @@ import yr.yaumilramadhani.newsapp.presentations.home.HomeScreen
 import yr.yaumilramadhani.newsapp.presentations.home.HomeViewModel
 import yr.yaumilramadhani.newsapp.presentations.onboarding.OnBoardingScreen
 import yr.yaumilramadhani.newsapp.presentations.onboarding.OnBoardingViewModel
+import yr.yaumilramadhani.newsapp.presentations.search.SearchScreen
+import yr.yaumilramadhani.newsapp.presentations.search.SearchViewModel
 
 @Composable
 fun NavGraph(
@@ -46,9 +48,8 @@ fun NavGraph(
                 composable(
                     route = Routes.NewsNavigatorScreen.route,
                 ) {
-                    val viewModel: HomeViewModel = hiltViewModel()
-                    val articles = viewModel.news.collectAsLazyPagingItems()
-                    HomeScreen(articles = articles, navigate = {})
+                    val viewModel: SearchViewModel = hiltViewModel()
+                    SearchScreen(state = viewModel.state.value, event = viewModel::onEvent, navigate = {})
                 }
             }
     }

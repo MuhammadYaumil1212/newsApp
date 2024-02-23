@@ -18,6 +18,7 @@ import yr.yaumilramadhani.newsapp.domain.usecases.appEntry.ReadAppEntry
 import yr.yaumilramadhani.newsapp.domain.usecases.appEntry.SaveAppEntry
 import yr.yaumilramadhani.newsapp.domain.usecases.news.GetNews
 import yr.yaumilramadhani.newsapp.domain.usecases.news.NewsUseCase
+import yr.yaumilramadhani.newsapp.domain.usecases.news.SearchNews
 import yr.yaumilramadhani.newsapp.util.Constants
 import javax.inject.Singleton
 
@@ -61,7 +62,8 @@ object AppModule {
         newsRepository: NewsRepository
     ): NewsUseCase{
         return  NewsUseCase(
-            getNews = GetNews(newsRepository)
+            getNews = GetNews(newsRepository),
+            searchNews = SearchNews(newsRepository)
         )
     }
 

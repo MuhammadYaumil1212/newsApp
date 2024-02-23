@@ -55,7 +55,7 @@ fun SearchBar(
         }
     }
 
-    Box(modifier = modifier.padding(start = 20.dp, end = 20.dp)){
+    Box(modifier = modifier){
         val containerColor = colorResource(id = R.color.input_background)
         val colors = TextFieldDefaults.textFieldColors(
             focusedIndicatorColor = Color.Gray
